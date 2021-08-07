@@ -30,3 +30,34 @@ Route::group(
         Route::patch('edit','AuthController@editUser');
     }
 );
+
+Route::group(
+    [
+        'middleware' => 'api',
+        'namespace' => 'App\Http\Controllers',
+        'prefix' => 'country'
+    ],
+    function (){
+        Route::post('', 'CountryController@create');
+        Route::patch('{id}', 'CountryController@edit');
+        Route::delete('{id}', 'CountryController@delete');
+        Route::get('', 'CountryController@getAll');
+        Route::get('/', 'CountryController@getByName');
+        Route::get('{id}', 'CountryController@getCountryById');
+    }
+);
+
+Route::group(
+    [
+        'middleware' => 'api',
+        'namespace' => 'App\Http\Controllers',
+        'prefix' => 'city'
+    ],
+    function (){
+        Route::post('', 'CityController@create');
+        Route::patch('', 'CityController@edit');
+        Route::delete('{id}', 'CityController@delete');
+        Route::get('/', 'CityController@getCityByCountryId');
+        Route::get('/{id}', 'CityController@getCityById');
+    }
+);
