@@ -55,9 +55,65 @@ Route::group(
     ],
     function (){
         Route::post('', 'CityController@create');
-        Route::patch('', 'CityController@edit');
+        Route::patch('{id}', 'CityController@edit');
         Route::delete('{id}', 'CityController@delete');
         Route::get('/', 'CityController@getCityByCountryId');
         Route::get('/{id}', 'CityController@getCityById');
+    }
+);
+
+Route::group(
+    [
+        'middleware' => 'api',
+        'namespace' => 'App\Http\Controllers',
+        'prefix' => 'type'
+    ],
+    function (){
+        Route::post('', 'TypeController@create');
+        Route::patch('{id}', 'TypeController@edit');
+        Route::delete('{id}', 'TypeController@delete');
+        Route::get('', 'TypeController@getAll');
+    }
+);
+
+Route::group(
+    [
+        'middleware' => 'api',
+        'namespace' => 'App\Http\Controllers',
+        'prefix' => 'typeproperty'
+    ],
+    function(){
+        Route::post('', 'TypePropertyController@create');
+        Route::patch('{id}', 'TypePropertyController@edit');
+        Route::delete('{id}', 'TypePropertyController@delete');
+        Route::get('', 'TypePropertyController@getAll');
+    }
+);
+
+Route::group(
+    [
+        'middleware' => 'api',
+        'namespace' => 'App\Http\Controllers',
+        'prefix' => 'currency'
+    ],
+    function(){
+        Route::post('', 'CurrencyController@create');
+        Route::patch('{id}', 'CurrencyController@edit');
+        Route::delete('{id}', 'CurrencyController@delete');
+        Route::get('', 'CurrencyController@getAll');
+    }
+);
+
+Route::group(
+    [
+        'middleware' => 'api',
+        'namespace' => 'App\Http\Controllers',
+        'prefix' => 'unit'
+    ],
+    function(){
+        Route::post('', 'UnitController@create');
+        Route::patch('{id}', 'UnitController@edit');
+        Route::delete('{id}', 'UnitController@delete');
+        Route::get('', 'UnitController@getAll');
     }
 );
