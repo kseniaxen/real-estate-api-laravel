@@ -14,4 +14,7 @@ class Currency extends Model
         'id',
         'name'
     ];
+    public function apartments(){
+        return $this->hasMany(Apartment::class,'currencyId', 'id');
+    }
 }

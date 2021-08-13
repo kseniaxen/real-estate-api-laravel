@@ -20,7 +20,7 @@ Route::group(
         'namespace' => 'App\Http\Controllers',
         'prefix' => 'auth'
     ],
-    function ($router){
+    function (){
         Route::post('login', 'AuthController@login');
         Route::post('register','AuthController@register');
         Route::post('logout','AuthController@logout');
@@ -115,5 +115,20 @@ Route::group(
         Route::patch('{id}', 'UnitController@edit');
         Route::delete('{id}', 'UnitController@delete');
         Route::get('', 'UnitController@getAll');
+    }
+);
+
+Route::group(
+    [
+        'middleware' => 'api',
+        'namespace' => 'App\Http\Controllers',
+        'prefix' => 'apartment'
+    ],
+    function(){
+        Route::post('', 'ApartmentController@create');
+        Route::patch('{id}','ApartmentController@edit');
+        Route::delete('{id}','ApartmentController@delete');
+        Route::get('','ApartmentController@getAllBySection');
+        Route::get('/count','ApartmentController@getTotalCount');
     }
 );

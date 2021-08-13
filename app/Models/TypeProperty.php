@@ -14,4 +14,7 @@ class TypeProperty extends Model
         'id',
         'name'
     ];
+    public function apartments(){
+        return $this->hasMany(Apartment::class,'type_propertyId', 'id');
+    }
 }

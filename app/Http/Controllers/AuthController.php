@@ -26,7 +26,7 @@ class AuthController extends Controller
                 $request->all(),
                 [
                     'email' => 'required|email',
-                    'password' => 'required|string|min:6'
+                    'password' => 'required|string|min:4'
                 ]
             );
 

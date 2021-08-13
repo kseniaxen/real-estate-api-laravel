@@ -15,4 +15,7 @@ class City extends Model
         'name',
         'countryId'
     ];
+    public function apartments(){
+        return $this->hasMany(Apartment::class,'cityId', 'id');
+    }
 }

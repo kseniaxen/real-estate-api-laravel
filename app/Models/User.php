@@ -44,4 +44,7 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims(){
         return [];
     }
+    public function apartments(){
+        return $this->hasMany(Apartment::class,'userId', 'id');
+    }
 }
