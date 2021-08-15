@@ -122,7 +122,7 @@ Route::group(
     [
         'middleware' => 'api',
         'namespace' => 'App\Http\Controllers',
-        'prefix' => 'apartment'
+        'prefix' => 'apartmentuser'
     ],
     function(){
         Route::post('', 'ApartmentController@create');
@@ -130,5 +130,18 @@ Route::group(
         Route::delete('{id}','ApartmentController@delete');
         Route::get('','ApartmentController@getAllBySection');
         Route::get('/count','ApartmentController@getTotalCount');
+    }
+);
+
+Route::group(
+    [
+        'middleware' => 'api',
+        'namespace' => 'App\Http\Controllers',
+        'prefix' => 'apartment'
+    ],
+    function(){
+        Route::get('', 'ApartmentCommonController@getAllBySection');
+        Route::get('/count', 'ApartmentCommonController@getTotalCount');
+        Route::get('/filter','ApartmentCommonController@filter');
     }
 );
