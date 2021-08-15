@@ -2,7 +2,7 @@
 
 namespace App\Filters;
 
-class ApartmentFilter extends QueryFilter
+class HouseFilter extends QueryFilter
 {
     public function type_propertyId($id = null){
         return $this->builder->when($id, function($query) use($id){
@@ -31,12 +31,6 @@ class ApartmentFilter extends QueryFilter
     public function rooms($count = null){
         return $this->builder->when($count, function($query) use($count){
             $query->where('rooms', $count);
-        });
-    }
-
-    public function floor($count = null){
-        return $this->builder->when($count, function($query) use($count){
-            $query->where('floor', $count);
         });
     }
 
@@ -69,5 +63,4 @@ class ApartmentFilter extends QueryFilter
             $query->where('price', '<=', $price);
         });
     }
-
 }

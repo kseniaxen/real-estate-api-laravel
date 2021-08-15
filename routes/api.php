@@ -160,3 +160,16 @@ Route::group(
         Route::get('/count','HouseController@getTotalCount');
     }
 );
+
+Route::group(
+    [
+        'middleware' => 'api',
+        'namespace' => 'App\Http\Controllers',
+        'prefix' => 'house'
+    ],
+    function(){
+        Route::get('', 'HouseCommonController@getAllBySection');
+        Route::get('/count', 'HouseCommonController@getTotalCount');
+        Route::get('/filter','HouseCommonController@filter');
+    }
+);

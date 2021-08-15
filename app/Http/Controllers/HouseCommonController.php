@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Filters\ApartmentFilter;
-use App\Models\Apartment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Models\House;
 
-class ApartmentCommonController extends Controller
+class HouseCommonController extends Controller
 {
     public function __construct(){
 
@@ -28,7 +28,7 @@ class ApartmentCommonController extends Controller
             }
 
             $array_id = range($request->input('start'), $request->input('end'),1);
-            return $this->responseContext('success','Get all apartments by section', Apartment::whereIn('id',$array_id)->get(),200);
+            return $this->responseContext('success','Get all houses by section', House::whereIn('id',$array_id)->get(),200);
         }catch (Exception $ex){
             return $this->responseContext('failure',$ex->getMessage(),[],$ex->getCode());
         }
@@ -36,15 +36,15 @@ class ApartmentCommonController extends Controller
 
     public function getTotalCount(){
         try{
-            return $this->responseContext('success','Get total count apartments', Apartment::count(),200);
+            return $this->responseContext('success','Get total count houses', House::count(),200);
         }catch (Exception $ex){
             return $this->responseContext('failure',$ex->getMessage(),[],$ex->getCode());
         }
     }
 
     public function filter(ApartmentFilter $request){
-        $apartments = Apartment::filter($request)->get();
-        return $this->responseContext('success','Filter apartments', $apartments,200);
+        $houses = House::filter($request)->get();
+        return $this->responseContext('success','Filter houses', $houses,200);
     }
 
     protected function responseContext($status, $message, $data, $statusCode){
