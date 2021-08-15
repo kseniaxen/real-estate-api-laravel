@@ -145,3 +145,18 @@ Route::group(
         Route::get('/filter','ApartmentCommonController@filter');
     }
 );
+
+Route::group(
+    [
+        'middleware' => 'api',
+        'namespace' => 'App\Http\Controllers',
+        'prefix' => 'houseuser'
+    ],
+    function(){
+        Route::post('', 'HouseController@create');
+        Route::patch('{id}','HouseController@edit');
+        Route::delete('{id}','HouseController@delete');
+        Route::get('','HouseController@getAllBySection');
+        Route::get('/count','HouseController@getTotalCount');
+    }
+);

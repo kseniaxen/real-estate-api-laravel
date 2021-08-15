@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Apartment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use App\Models\House;
 
-class ApartmentController extends Controller
+class HouseController extends Controller
 {
     protected $user;
     /**
@@ -30,11 +30,12 @@ class ApartmentController extends Controller
                     'countryId' => 'required|integer|exists:countries,id',
                     'cityId' => 'required|integer|exists:cities,id',
                     'currencyId' => 'required|integer|exists:currencies,id',
+                    'unitId' => 'required|integer|exists:units,id',
                     'rooms' => 'required|integer|between:1,10',
                     'area' => 'required|numeric',
                     'residential_area' => 'numeric',
                     'kitchen_area' => 'numeric',
-                    'floor' => 'required|integer',
+                    'land_area' => 'required|numeric',
                     'floors' => 'required|integer',
                     'price' => 'required|numeric',
                     'description' => 'string',
@@ -47,8 +48,8 @@ class ApartmentController extends Controller
                 return $this->responseContext('failure','Invalid data',$validator->errors(),400);
             }
 
-            $apartment = Apartment::create(array_merge($validator->validated()));
-            return $this->responseContext('success','Create '.$apartment['title'].' apartment', [],201);
+            $house = House::create(array_merge($validator->validated()));
+            return $this->responseContext('success','Create '.$house['title'].' house', [],201);
         }catch(Exception $ex){
             return $this->responseContext('failure',$ex->getMessage(),[],$ex->getCode());
         }
@@ -65,11 +66,12 @@ class ApartmentController extends Controller
                     'countryId' => 'required|integer|exists:countries,id',
                     'cityId' => 'required|integer|exists:cities,id',
                     'currencyId' => 'required|integer|exists:currencies,id',
+                    'unitId' => 'required|integer|exists:units,id',
                     'rooms' => 'required|integer|between:1,10',
                     'area' => 'required|numeric',
                     'residential_area' => 'numeric',
                     'kitchen_area' => 'numeric',
-                    'floor' => 'required|integer',
+                    'land_area' => 'required|numeric',
                     'floors' => 'required|integer',
                     'price' => 'required|numeric',
                     'description' => 'string',
@@ -82,8 +84,8 @@ class ApartmentController extends Controller
                 return $this->responseContext('failure','Invalid data',$validator->errors(),400);
             }
 
-            $apartment = Apartment::whereId($id)->update($request->all());
-            return $this->responseContext('success','Edit '.Apartment::find($id)['title'].' apartment' , [],200);
+            House::whereId($id)->update($request->all());
+            return $this->responseContext('success','Edit '.House::find($id)['title'].' house' , [],200);
         }catch (Exception $ex){
             return $this->responseContext('failure',$ex->getMessage(),[],$ex->getCode());
         }
@@ -100,9 +102,9 @@ class ApartmentController extends Controller
                 return $this->responseContext('failure','Invalid data',$validator->errors(),400);
             }
 
-            Apartment::destroy($id);
+            House::destroy($id);
 
-            return $this->responseContext('success','Delete apartment', [],204);
+            return $this->responseContext('success','Delete house', [],204);
         }catch(Exception $ex){
             return $this->responseContext('failure',$ex->getMessage(),[],$ex->getCode());
         }
@@ -123,7 +125,7 @@ class ApartmentController extends Controller
             }
 
             $array_id = range($request->input('start'), $request->input('end'),1);
-            return $this->responseContext('success','Get all apartments by section', Apartment::where('userId',$this->guard()->id())->whereIn('id',$array_id)->get(),200);
+            return $this->responseContext('success','Get all houses by section', House::where('userId',$this->guard()->id())->whereIn('id',$array_id)->get(),200);
         }catch (Exception $ex){
             return $this->responseContext('failure',$ex->getMessage(),[],$ex->getCode());
         }
@@ -131,7 +133,7 @@ class ApartmentController extends Controller
 
     public function getTotalCount(){
         try{
-            return $this->responseContext('success','Get total count apartments', Apartment::where('userId',$this->guard()->id())->count(),200);
+            return $this->responseContext('success','Get total count houses', House::where('userId',$this->guard()->id())->count(),200);
         }catch (Exception $ex){
             return $this->responseContext('failure',$ex->getMessage(),[],$ex->getCode());
         }
