@@ -30,6 +30,7 @@ class CreateApartmentsTable extends Migration
             $table->decimal('price',15,2);
             $table->string('description')->nullable();
             $table->string('title');
+            $table->longText('image')->nullable();
             $table->timestamps();
 
             $table->foreign('userId')->references('id')->on('users')->onDelete('cascade');

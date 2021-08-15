@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(TypePropertySeeder::class);
         $this->call(CurrencySeeder::class);
         $this->call(UnitSeeder::class);
+        $this->call(ApartmentSeeder::class);
     }
 }

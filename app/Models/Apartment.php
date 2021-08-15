@@ -26,7 +26,8 @@ class Apartment extends Model
         'floors',
         'price',
         'description',
-        'title'
+        'title',
+        'image'
     ];
 
     public function scopeFilter(Builder $builder, QueryFilter $filter){

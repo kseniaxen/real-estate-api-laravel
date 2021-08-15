@@ -39,7 +39,8 @@ class ApartmentController extends Controller
                     'floors' => 'required|integer',
                     'price' => 'required|numeric',
                     'description' => 'string',
-                    'title' => 'required|string'
+                    'title' => 'required|string',
+                    'image' => 'string'
                 ]
             );
 
@@ -73,8 +74,8 @@ class ApartmentController extends Controller
                     'floors' => 'required|integer',
                     'price' => 'required|numeric',
                     'description' => 'string',
-                    'title' => 'required|string'
-
+                    'title' => 'required|string',
+                    'image' => 'string'
                 ]
             );
 
