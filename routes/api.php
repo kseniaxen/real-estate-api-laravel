@@ -42,7 +42,7 @@ Route::group(
         Route::patch('{id}', 'CountryController@edit');
         Route::delete('{id}', 'CountryController@delete');
         Route::get('', 'CountryController@getAll');
-        Route::get('/', 'CountryController@getByName');
+        Route::get('/city', 'CountryController@getByName');
         Route::get('{id}', 'CountryController@getCountryById');
     }
 );
