@@ -33,14 +33,16 @@ class HouseController extends Controller
                     'unitId' => 'required|integer|exists:units,id',
                     'rooms' => 'required|integer|between:1,10',
                     'area' => 'required|numeric',
-                    'residential_area' => 'numeric',
-                    'kitchen_area' => 'numeric',
+                    'residential_area' => 'numeric|nullable',
+                    'kitchen_area' => 'numeric|nullable',
                     'land_area' => 'required|numeric',
                     'floors' => 'required|integer',
                     'price' => 'required|numeric',
-                    'description' => 'string',
-                    'title' => 'required|string',
-                    'image' => 'string'
+                    'description' => 'string|nullable',
+                    'title' => 'required|string|between:1,33',
+                    'name' => 'string',
+                    'phone' => 'integer',
+                    'image' => 'string|nullable'
                 ]
             );
 
@@ -69,14 +71,16 @@ class HouseController extends Controller
                     'unitId' => 'required|integer|exists:units,id',
                     'rooms' => 'required|integer|between:1,10',
                     'area' => 'required|numeric',
-                    'residential_area' => 'numeric',
-                    'kitchen_area' => 'numeric',
+                    'residential_area' => 'numeric|nullable',
+                    'kitchen_area' => 'numeric|nullable',
                     'land_area' => 'required|numeric',
                     'floors' => 'required|integer',
                     'price' => 'required|numeric',
-                    'description' => 'string',
-                    'title' => 'required|string',
-                    'image' => 'string'
+                    'description' => 'string|nullable',
+                    'title' => 'required|string|between:1,33',
+                    'name' => 'string',
+                    'phone' => 'integer',
+                    'image' => 'string|nullable'
                 ]
             );
 
@@ -125,7 +129,14 @@ class HouseController extends Controller
             }
 
             $array_id = range($request->input('start'), $request->input('end'),1);
-            return $this->responseContext('success','Get all houses by section', House::where('userId',$this->guard()->id())->whereIn('id',$array_id)->get(),200);
+            return $this->responseContext('success','Get all houses by section', House::where('userId',$this->guard()->id())->whereIn('id',$array_id)->
+                        with('country')->
+                        with('city')->
+                        with('currency')->
+                        with('type')->
+                        with('typeproperty')->
+                        with('unit')->
+                        get(),200);
         }catch (Exception $ex){
             return $this->responseContext('failure',$ex->getMessage(),[],$ex->getCode());
         }

@@ -12,7 +12,7 @@ class UnitSeeder extends Seeder
     public function run()
     {
         DB::table('units')->insert([
-            'name'=> 'сотка'
+            'name'=> 'соток'
         ]);
         DB::table('units')->insert([
             'name'=> 'гектар'

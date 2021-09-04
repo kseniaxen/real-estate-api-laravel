@@ -32,14 +32,16 @@ class ApartmentController extends Controller
                     'currencyId' => 'required|integer|exists:currencies,id',
                     'rooms' => 'required|integer|between:1,10',
                     'area' => 'required|numeric',
-                    'residential_area' => 'numeric',
-                    'kitchen_area' => 'numeric',
+                    'residential_area' => 'numeric|nullable',
+                    'kitchen_area' => 'numeric|nullable',
                     'floor' => 'required|integer',
                     'floors' => 'required|integer',
                     'price' => 'required|numeric',
-                    'description' => 'string',
-                    'title' => 'required|string',
-                    'image' => 'string'
+                    'description' => 'string|nullable',
+                    'title' => 'required|string|between:1,33',
+                    'name' => 'string',
+                    'phone' => 'integer',
+                    'image' => 'string|nullable'
                 ]
             );
 
@@ -67,14 +69,16 @@ class ApartmentController extends Controller
                     'currencyId' => 'required|integer|exists:currencies,id',
                     'rooms' => 'required|integer|between:1,10',
                     'area' => 'required|numeric',
-                    'residential_area' => 'numeric',
-                    'kitchen_area' => 'numeric',
+                    'residential_area' => 'numeric|nullable',
+                    'kitchen_area' => 'numeric|nullable',
                     'floor' => 'required|integer',
                     'floors' => 'required|integer',
                     'price' => 'required|numeric',
-                    'description' => 'string',
-                    'title' => 'required|string',
-                    'image' => 'string'
+                    'description' => 'string|nullable',
+                    'title' => 'required|string|between:1,33',
+                    'name' => 'string',
+                    'phone' => 'integer',
+                    'image' => 'string|nullable'
                 ]
             );
 
@@ -123,7 +127,13 @@ class ApartmentController extends Controller
             }
 
             $array_id = range($request->input('start'), $request->input('end'),1);
-            return $this->responseContext('success','Get all apartments by section', Apartment::where('userId',$this->guard()->id())->whereIn('id',$array_id)->get(),200);
+            return $this->responseContext('success','Get all apartments by section', Apartment::where('userId',$this->guard()->id())->whereIn('id',$array_id)->
+                        with('country')->
+                        with('city')->
+                        with('currency')->
+                        with('type')->
+                        with('typeproperty')->
+                            get(),200);
         }catch (Exception $ex){
             return $this->responseContext('failure',$ex->getMessage(),[],$ex->getCode());
         }

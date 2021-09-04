@@ -137,9 +137,9 @@ class AuthController extends Controller
             );
 
             if($validatorCheckUserEmail->fails()){
-                return $this->responseContext('success',' Check exist email ' . $request->input('email'),['Exist' => 'false'],200);
+                return $this->responseContext('success',' Check exist email ' . $request->input('email'),['exist' => 'false'],200);
             }
-            return $this->responseContext('success',' Check exist email ' . $request->input('email'),['Exist' => 'true'],200);
+            return $this->responseContext('success',' Check exist email ' . $request->input('email'),['exist' => 'true'],200);
         }catch (Exception $ex){
             return $this->responseContext('failure',$ex->getMessage(),[],$ex->getCode());
         }

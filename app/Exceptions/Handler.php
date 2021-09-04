@@ -52,6 +52,6 @@ class Handler extends ExceptionHandler
     {
         //return parent::render($request, $exception);
 
-        return response(['error' => $exception->getMessage()], $exception->getCode() ?: 400);
+        return response(['status' => 'failure','error' => $exception->getMessage()], $exception->getCode() ?: 400);
     }
 }

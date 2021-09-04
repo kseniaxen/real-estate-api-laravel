@@ -26,7 +26,7 @@ Route::group(
         Route::post('logout','AuthController@logout');
         Route::get('user','AuthController@userInfo');
         Route::get('refresh','AuthController@refresh');
-        Route::get('check','AuthController@checkUser');
+        Route::post('/check','AuthController@checkUser');
         Route::patch('edit','AuthController@editUser');
     }
 );
@@ -128,7 +128,7 @@ Route::group(
         Route::post('', 'ApartmentController@create');
         Route::patch('{id}','ApartmentController@edit');
         Route::delete('{id}','ApartmentController@delete');
-        Route::get('','ApartmentController@getAllBySection');
+        Route::post('get','ApartmentController@getAllBySection');
         Route::get('/count','ApartmentController@getTotalCount');
     }
 );
@@ -156,7 +156,7 @@ Route::group(
         Route::post('', 'HouseController@create');
         Route::patch('{id}','HouseController@edit');
         Route::delete('{id}','HouseController@delete');
-        Route::get('','HouseController@getAllBySection');
+        Route::post('get','HouseController@getAllBySection');
         Route::get('/count','HouseController@getTotalCount');
     }
 );
