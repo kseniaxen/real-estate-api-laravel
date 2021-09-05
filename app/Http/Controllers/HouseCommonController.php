@@ -49,7 +49,13 @@ class HouseCommonController extends Controller
 
     public function getLastFour(){
         try{
-            return $this->responseContext('success','Get last four apartments', House::orderBy('created_at', 'desc')->take(4)->get(),200);
+            return $this->responseContext('success','Get last four apartments', House::orderBy('created_at', 'desc')->take(4)->
+                with('country')->
+                with('city')->
+                with('currency')->
+                with('type')->
+                with('typeproperty')->
+                get(),200);
         }catch (Exception $ex){
             return $this->responseContext('failure',$ex->getMessage(),[],$ex->getCode());
         }

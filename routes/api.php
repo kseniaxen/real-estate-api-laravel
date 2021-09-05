@@ -140,7 +140,7 @@ Route::group(
         'prefix' => 'apartment'
     ],
     function(){
-        Route::get('', 'ApartmentCommonController@getAllBySection');
+        Route::post('', 'ApartmentCommonController@getAllBySection');
         Route::get('/count', 'ApartmentCommonController@getTotalCount');
         Route::get('/filter','ApartmentCommonController@filter');
         Route::get('/last', 'ApartmentCommonController@getLastFour');
