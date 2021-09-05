@@ -112,22 +112,9 @@ class ApartmentController extends Controller
         }
     }
 
-    public function getAllBySection(Request $request){
+    public function getAll(){
         try{
-            $validator = Validator::make(
-                $request->all(),
-                [
-                    'start' => 'required|integer',
-                    'end' => 'required|integer',
-                ]
-            );
-
-            if($validator->fails()){
-                return $this->responseContext('failure','Invalid data',$validator->errors(),400);
-            }
-
-            $array_id = range($request->input('start'), $request->input('end'),1);
-            return $this->responseContext('success','Get all apartments by section', Apartment::where('userId',$this->guard()->id())->whereIn('id',$array_id)->
+            return $this->responseContext('success','Get all apartments by section', Apartment::where('userId',$this->guard()->id())->
                         with('country')->
                         with('city')->
                         with('currency')->

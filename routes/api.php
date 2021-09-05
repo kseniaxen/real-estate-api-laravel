@@ -128,7 +128,7 @@ Route::group(
         Route::post('', 'ApartmentController@create');
         Route::patch('{id}','ApartmentController@edit');
         Route::delete('{id}','ApartmentController@delete');
-        Route::post('get','ApartmentController@getAllBySection');
+        Route::get('','ApartmentController@getAll');
         Route::get('/count','ApartmentController@getTotalCount');
     }
 );
@@ -156,7 +156,7 @@ Route::group(
         Route::post('', 'HouseController@create');
         Route::patch('{id}','HouseController@edit');
         Route::delete('{id}','HouseController@delete');
-        Route::post('get','HouseController@getAllBySection');
+        Route::get('','HouseController@getAll');
         Route::get('/count','HouseController@getTotalCount');
     }
 );
