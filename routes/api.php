@@ -143,6 +143,7 @@ Route::group(
         Route::get('', 'ApartmentCommonController@getAllBySection');
         Route::get('/count', 'ApartmentCommonController@getTotalCount');
         Route::get('/filter','ApartmentCommonController@filter');
+        Route::get('/last', 'ApartmentCommonController@getLastFour');
     }
 );
 
@@ -171,5 +172,6 @@ Route::group(
         Route::get('', 'HouseCommonController@getAllBySection');
         Route::get('/count', 'HouseCommonController@getTotalCount');
         Route::get('/filter','HouseCommonController@filter');
+        Route::get('/last', 'HouseCommonController@getLastFour');
     }
 );

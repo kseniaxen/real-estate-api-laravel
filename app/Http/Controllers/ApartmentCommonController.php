@@ -47,6 +47,14 @@ class ApartmentCommonController extends Controller
         return $this->responseContext('success','Filter apartments', $apartments,200);
     }
 
+    public function getLastFour(){
+        try{
+            return $this->responseContext('success','Get last four apartments', Apartment::orderBy('created_at', 'desc')->take(4)->get(),200);
+        }catch (Exception $ex){
+            return $this->responseContext('failure',$ex->getMessage(),[],$ex->getCode());
+        }
+    }
+
     protected function responseContext($status, $message, $data, $statusCode){
         return response()->json([
             'status' => $status,

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Filters\ApartmentFilter;
+use App\Filters\HouseFilter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\House;
@@ -42,9 +42,17 @@ class HouseCommonController extends Controller
         }
     }
 
-    public function filter(ApartmentFilter $request){
+    public function filter(HouseFilter $request){
         $houses = House::filter($request)->get();
         return $this->responseContext('success','Filter houses', $houses,200);
+    }
+
+    public function getLastFour(){
+        try{
+            return $this->responseContext('success','Get last four apartments', House::orderBy('created_at', 'desc')->take(4)->get(),200);
+        }catch (Exception $ex){
+            return $this->responseContext('failure',$ex->getMessage(),[],$ex->getCode());
+        }
     }
 
     protected function responseContext($status, $message, $data, $statusCode){
