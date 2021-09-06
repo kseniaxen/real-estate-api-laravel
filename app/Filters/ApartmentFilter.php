@@ -28,21 +28,45 @@ class ApartmentFilter extends QueryFilter
         });
     }
 
+    public function currencyId($id = null){
+        return $this->builder->when($id, function($query) use($id){
+            $query->where('currencyId', $id);
+        });
+    }
+
     public function rooms($count = null){
+        if($count >= 4){
+            return $this->builder->when($count, function($query) use($count){
+                $query->where('rooms','>=', $count);
+            });
+        }else{
+            return $this->builder->when($count, function($query) use($count){
+                $query->where('rooms', $count);
+            });
+        }
+    }
+
+    public function floorFrom($count = null){
         return $this->builder->when($count, function($query) use($count){
-            $query->where('rooms', $count);
+            $query->where('floor', '>=', $count);
         });
     }
 
-    public function floor($count = null){
+    public function floorTo($count = null){
         return $this->builder->when($count, function($query) use($count){
-            $query->where('floor', $count);
+            $query->where('floor', '<=', $count);
         });
     }
 
-    public function floors($count = null){
+    public function floorsFrom($count = null){
         return $this->builder->when($count, function($query) use($count){
-            $query->where('floors', $count);
+            $query->where('floors', '>=', $count);
+        });
+    }
+
+    public function floorsTo($count = null){
+        return $this->builder->when($count, function($query) use($count){
+            $query->where('floors', '<=', $count);
         });
     }
 

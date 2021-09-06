@@ -28,7 +28,13 @@ class ApartmentCommonController extends Controller
             }
 
             $array_id = range($request->input('start'), $request->input('end'),1);
-            return $this->responseContext('success','Get all apartments by section', Apartment::whereIn('id',$array_id)->get(),200);
+            return $this->responseContext('success','Get all apartments by section', Apartment::whereIn('id',$array_id)->
+                with('country')->
+                with('city')->
+                with('currency')->
+                with('type')->
+                with('typeproperty')->
+                get(),200);
         }catch (Exception $ex){
             return $this->responseContext('failure',$ex->getMessage(),[],$ex->getCode());
         }
@@ -43,7 +49,13 @@ class ApartmentCommonController extends Controller
     }
 
     public function filter(ApartmentFilter $request){
-        $apartments = Apartment::filter($request)->get();
+        $apartments = Apartment::filter($request)->
+            with('country')->
+            with('city')->
+            with('currency')->
+            with('type')->
+            with('typeproperty')->
+            get();
         return $this->responseContext('success','Filter apartments', $apartments,200);
     }
 

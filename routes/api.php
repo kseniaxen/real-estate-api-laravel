@@ -142,7 +142,7 @@ Route::group(
     function(){
         Route::post('', 'ApartmentCommonController@getAllBySection');
         Route::get('/count', 'ApartmentCommonController@getTotalCount');
-        Route::get('/filter','ApartmentCommonController@filter');
+        Route::get('','ApartmentCommonController@filter');
         Route::get('/last', 'ApartmentCommonController@getLastFour');
     }
 );
@@ -169,9 +169,9 @@ Route::group(
         'prefix' => 'house'
     ],
     function(){
-        Route::get('', 'HouseCommonController@getAllBySection');
+        Route::post('', 'HouseCommonController@getAllBySection');
         Route::get('/count', 'HouseCommonController@getTotalCount');
-        Route::get('/filter','HouseCommonController@filter');
+        Route::get('','HouseCommonController@filter');
         Route::get('/last', 'HouseCommonController@getLastFour');
     }
 );

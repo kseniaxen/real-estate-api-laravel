@@ -14,4 +14,7 @@ class Unit extends Model
         'id',
         'name'
     ];
+    public function houses(){
+        return $this->hasMany(House::class,'unitId', 'id');
+    }
 }

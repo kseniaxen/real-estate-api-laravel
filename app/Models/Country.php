@@ -17,4 +17,7 @@ class Country extends Model
     public function apartments(){
         return $this->hasMany(Apartment::class,'countryId', 'id');
     }
+    public function houses(){
+        return $this->hasMany(House::class,'countryId', 'id');
+    }
 }

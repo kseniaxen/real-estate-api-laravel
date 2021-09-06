@@ -28,15 +28,33 @@ class HouseFilter extends QueryFilter
         });
     }
 
-    public function rooms($count = null){
-        return $this->builder->when($count, function($query) use($count){
-            $query->where('rooms', $count);
+    public function unitId($id = null){
+        return $this->builder->when($id, function($query) use($id){
+            $query->where('unitId', $id);
         });
     }
 
-    public function floors($count = null){
+    public function rooms($count = null){
+        if($count >= 4){
+            return $this->builder->when($count, function($query) use($count){
+                $query->where('rooms','>=', $count);
+            });
+        }else{
+            return $this->builder->when($count, function($query) use($count){
+                $query->where('rooms', $count);
+            });
+        }
+    }
+
+    public function floorsFrom($count = null){
         return $this->builder->when($count, function($query) use($count){
-            $query->where('floors', $count);
+            $query->where('floors', '>=', $count);
+        });
+    }
+
+    public function floorsTo($count = null){
+        return $this->builder->when($count, function($query) use($count){
+            $query->where('floors', '<=', $count);
         });
     }
 
@@ -49,6 +67,18 @@ class HouseFilter extends QueryFilter
     public function areaTo($area = null){
         return $this->builder->when($area, function($query) use($area){
             $query->where('area', '<=', $area);
+        });
+    }
+
+    public function landFrom($area = null){
+        return $this->builder->when($area, function($query) use($area){
+            $query->where('land_area', '>=', $area);
+        });
+    }
+
+    public function landTo($area = null){
+        return $this->builder->when($area, function($query) use($area){
+            $query->where('land_area', '<=', $area);
         });
     }
 

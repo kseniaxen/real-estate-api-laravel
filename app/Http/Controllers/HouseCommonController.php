@@ -28,7 +28,14 @@ class HouseCommonController extends Controller
             }
 
             $array_id = range($request->input('start'), $request->input('end'),1);
-            return $this->responseContext('success','Get all houses by section', House::whereIn('id',$array_id)->get(),200);
+            return $this->responseContext('success','Get all houses by section', House::whereIn('id',$array_id)->
+                with('country')->
+                with('city')->
+                with('currency')->
+                with('type')->
+                with('typeproperty')->
+                with('unit')->
+                get(),200);
         }catch (Exception $ex){
             return $this->responseContext('failure',$ex->getMessage(),[],$ex->getCode());
         }
@@ -43,7 +50,14 @@ class HouseCommonController extends Controller
     }
 
     public function filter(HouseFilter $request){
-        $houses = House::filter($request)->get();
+        $houses = House::filter($request)->
+            with('country')->
+            with('city')->
+            with('currency')->
+            with('type')->
+            with('typeproperty')->
+            with('unit')->
+            get();
         return $this->responseContext('success','Filter houses', $houses,200);
     }
 
@@ -55,6 +69,7 @@ class HouseCommonController extends Controller
                 with('currency')->
                 with('type')->
                 with('typeproperty')->
+                with('unit')->
                 get(),200);
         }catch (Exception $ex){
             return $this->responseContext('failure',$ex->getMessage(),[],$ex->getCode());
