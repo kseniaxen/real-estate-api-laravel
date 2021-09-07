@@ -6,6 +6,11 @@ use App\Filters\QueryFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class House
+ * @property int id
+ * @package App\Models
+ */
 class House extends Model
 {
     protected $table = "houses";
