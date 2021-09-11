@@ -21,7 +21,7 @@ class RegisterTest extends DuskTestCase
                 ->type('#email', 'name@name.com')
                 ->type('#password', 'password')
                 ->click('#button')
-                ->pause(3000)
+                ->pause(5000)
                 ->assertSee('Приветствуем!');
         });
     }

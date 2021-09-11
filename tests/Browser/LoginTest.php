@@ -19,7 +19,7 @@ class LoginTest extends DuskTestCase
                 ->type('#email', 'user@user.com')
                 ->type('#password', 'user')
                 ->click('#button')
-                ->pause(3000)
+                ->pause(5000)
                 ->assertPathIs('/');
         });
     }

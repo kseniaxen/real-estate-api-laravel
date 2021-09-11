@@ -19,7 +19,7 @@ class FilterTest extends DuskTestCase
             $browser->visit('/apartment')
                 ->click('#room1')
                 ->click('#search')
-                ->pause(3000)
+                ->pause(5000)
                 ->assertSee('1222.00 грн');
         });
     }
@@ -35,7 +35,7 @@ class FilterTest extends DuskTestCase
             $browser->visit('/house')
                 ->type('#floorsFrom','3')
                 ->click('#search')
-                ->pause(3000)
+                ->pause(5000)
                 ->assertSee('Продам трехэтажный дом');
         });
     }
